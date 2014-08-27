@@ -16,16 +16,16 @@
             + ";background-repeat: no-repeat;position: absolute;";
 
         return this.each(function () {
-            obj = $(this);
+            var obj = $(this);
 
             var offset = $(this).offset();
 
             // Creating lens
-            var target = $("<div style='" + lensStyle + "' id='zoom_div' class='" + options.lensCss + "'>&nbsp;</div>").appendTo($(this).parent());
+            var target = $("<div style='" + lensStyle + "' class='" + options.lensCss + "'>&nbsp;</div>").appendTo(document.body);
             var targetSize = target.size();
-if (options.loadingImageSrc) { 
-  target.html('<img class="loading_image" src="' + options.loadingImageSrc + '">')
-}
+            if (options.loadingImageSrc) { 
+                 target.html('<img class="loading_image" src="' + options.loadingImageSrc + '">')
+            } 
             // Calculating actual size of image
             var imageSrc = options.imageSrc ? options.imageSrc : $(this).attr("src");
             var imageTag = "<img style='display:none;' src='" + imageSrc + "' />";
@@ -34,7 +34,7 @@ if (options.loadingImageSrc) {
             var heightRatio = 0;
 
             $(imageTag).load(function () {
-target.find('.loading_image').remove();
+                target.find('.loading_image').remove();
                 widthRatio = $(this).width() / obj.width();
                 heightRatio = $(this).height() / obj.height();
             }).appendTo($(this).parent());
